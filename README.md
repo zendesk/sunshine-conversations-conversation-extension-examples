@@ -6,7 +6,7 @@ You must have node.js and npm.
 
 ## Setup
 
-1. clone the demo-assets repository and `cd conversation-extension-examples`
+1. clone the smooch/conversation-extension-examples repository and `cd conversation-extension-examples`
 
 2. `npm install`
 
