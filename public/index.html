@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Home</title>
+</head>
+<body>
+	<ul>
+		<li><a onclick="book()" href="#">Try booking a hotel room</a></li>
+		<li><a onclick="reserve()" href="#">Try reserving a table</a></li>
+		<li><a onclick="configure()" href="#">Try subscribing to a service</a></li>
+	</ul>
+	<script src="sdk/smooch.js"></script>
+	<script>
+	function book() {
+		Smooch.updateUser({
+			givenName: 'Sue',
+			surname: 'Perb'
+		})
+			.then(function() {
+				return Smooch.sendMessage({
+					text: 'Hi I need to book a room for December 12',
+					type: 'text'
+				});
+			})
+			.then(function() {
+				setTimeout(function() {
+					Smooch.sendMessage({
+						text: '2 nights, deluxe suite and a connecting room',
+						metadata: { intent: 'book_room' },
+						type: 'text'
+					});
+				}, 500);
+			});
+	}
+
+	function reserve() {
+		Smooch.sendMessage({
+			text: 'I want to reserve a table',
+			type: 'text'
+		});
+	}
+
+	function configure() {
+		Smooch.sendMessage({
+			text: 'I want to subscribe to a service',
+			type: 'text'
+		});
+	}
+	</script>
+</body>
+</html>
