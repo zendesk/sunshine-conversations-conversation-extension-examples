@@ -322,23 +322,24 @@
 app.init(onStateChange, onComplete);
 
 function onStateChange(app, $this) {
-    if ($this.data ('restaurant')) {
+    if ($this.data('restaurant')) {
         app.state.restaurant = $this.data('restaurant');
         $('#selected-restaurant').html($this.data('restaurant'));
     }
 
-    if ($this.data ('thumb')) {
-        $('#selected-thumb').attr({ src: $this.data ('thumb') });
+    if ($this.data('thumb')) {
+        app.state.thumb = $this.data('thumb')
+        $('#selected-thumb').attr({ src: $this.data('thumb') });
     }
 
-    if ($this.data ('date')) {
+    if ($this.data('date')) {
         app.state.date = $this.data('date');
-        $('#selected-date').html($this.data ('date'));
+        $('#selected-date').html($this.data('date'));
     }
 
-    if ($this.data ('time')) {
+    if ($this.data('time')) {
         app.state.time = $this.data('time');
-        $('#selected-time').html($this.data ('time'));
+        $('#selected-time').html($this.data('time'));
         document.getElementById('timer').innerHTML = 05 + ":" + 00;
         startTimer();
     }
@@ -352,7 +353,7 @@ function onComplete(app) {
         ' on ' +
         app.state.date;
 
-    utils.postResponse(text);
+    utils.postResponse({ text: text, imagePath: app.state.thumb.replace('../..', '') });
 }
 
 function checkSecond(sec) {
@@ -362,7 +363,6 @@ function checkSecond(sec) {
 }
 
 function startTimer() {
-
     var presentTime = document.getElementById('timer').innerHTML;
     var timeArray = presentTime.split(/[:]+/);
     var m = timeArray[0];

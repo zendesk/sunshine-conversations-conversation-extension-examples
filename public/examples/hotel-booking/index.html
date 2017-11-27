@@ -725,12 +725,11 @@ function onStateChange(app, $this) {
 
 function onComplete(app) {
     console.log(app.state.thumb)
-    var text = '*Booking Confirmation*\n' +
+    var text = 'Selection: the ' +
         app.state.room +
-        '\nTuesday 12th December, 2 nights\nIncludes: ' +
-        app.state.package;
+        ' on Tuesday 12th December, for 2 nights';
 
-    utils.postResponse({ intent: 'room_booked', text: text, imagePath: app.state.thumb.replace('../..', '') });
+    utils.postResponse({ text: text, imagePath: app.state.thumb.replace('../..', '') });
 }
 </script>
 

@@ -1,0 +1,17 @@
+{
+	"I want to book a room": {
+		"path": "hotel-booking",
+		"text": "We have the following suites available with connecting rooms for 2 nights arriving on Tuesday, December 12th.",
+		"buttonText": "Choose a room"
+	},
+	"I want to reserve a table": {
+		"path": "restaurant-reservation",
+		"text": "Pick from the three hottest restaurants:",
+		"buttonText": "Make a reservation"
+	},
+	"I want to subscribe": {
+		"path": "service-subscription",
+		"text": "We have a range of baskets to suit any taste!",
+		"buttonText": "Choose a subscription"
+	}
+}
