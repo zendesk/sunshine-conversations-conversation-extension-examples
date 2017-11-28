@@ -1,5 +1,17 @@
 # Conversation Extensions Examples
 
+## Use Cases
+Here's a preview of the current Conversation Extension examples covered in this repo. Keep checking back as we'll be adding more examples soon.
+
+### Hotel Booking
+![Hotel Booking Preview](https://smooch.io/static_assets/images/shared/hotel-booking-preview.jpg)
+
+### Restaurant Reservation
+![Hotel Booking Preview](https://smooch.io/static_assets/images/shared/restaurant-reservation-preview.jpg)
+
+### Service Subscription
+![Hotel Booking Preview](https://smooch.io/static_assets/images/shared/service-subscription-preview.jpg)
+
 ## Prerequisites
 
 You must have node.js and npm.
@@ -23,19 +35,6 @@ You must have node.js and npm.
 1. take a look at the intents.json file to see the text that can be used to trigger a conversation-extension button
 
 2. integrate a messaging channel to Smooch and send one of the intent messages to get started
-
-## Use Cases Examples
-
-Here's a preview of the current Conversation Extension examples covered in this repo. Keep checking back as we'll be adding more examples soon.
-
-### Hotel Booking
-![Hotel Booking Preview](https://smooch.io/static_assets/images/shared/hotel-booking-preview.jpg)
-
-### Restaurant Reservation
-![Hotel Booking Preview](https://smooch.io/static_assets/images/shared/restaurant-reservation-preview.jpg)
-
-### Service Subscription
-![Hotel Booking Preview](https://smooch.io/static_assets/images/shared/service-subscription-preview.jpg)
 
 ## Explanation
 
