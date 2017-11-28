@@ -14,7 +14,7 @@ Here's a preview of the current Conversation Extension examples covered in this 
 
 ## Prerequisites
 
-You must have node.js and npm.
+These examples are built with node.js and npm.
 
 ## Setup
 
