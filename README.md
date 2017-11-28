@@ -1,5 +1,17 @@
 # Conversation Extensions Examples
 
+## Use Cases
+Here's a preview of the current Conversation Extension examples covered in this repo. Keep checking back as we'll be adding more examples soon.
+
+### Hotel Booking
+![Hotel Booking Preview](https://smooch.io/static_assets/images/shared/hotel-booking-preview.jpg)
+
+### Restaurant Reservation
+![Hotel Booking Preview](https://smooch.io/static_assets/images/shared/restaurant-reservation-preview.jpg)
+
+### Service Subscription
+![Hotel Booking Preview](https://smooch.io/static_assets/images/shared/service-subscription-preview.jpg)
+
 ## Prerequisites
 
 You must have node.js and npm.
