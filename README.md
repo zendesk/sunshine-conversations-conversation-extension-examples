@@ -24,6 +24,19 @@ You must have node.js and npm.
 
 2. integrate a messaging channel to Smooch and send one of the intent messages to get started
 
+## Use Cases Examples
+
+Here's a preview of the current Conversation Extension examples covered in this repo. Keep checking back as we'll be adding more examples soon.
+
+### Hotel Booking
+![Hotel Booking Preview](https://smooch.io/static_assets/images/shared/hotel-booking-preview.jpg)
+
+### Restaurant Reservation
+![Hotel Booking Preview](https://smooch.io/static_assets/images/shared/restaurant-reservation-preview.jpg)
+
+### Service Subscription
+![Hotel Booking Preview](https://smooch.io/static_assets/images/shared/service-subscription-preview.jpg)
+
 ## Explanation
 
 This service listens for appUser messages from Smooch and responds with a button triggering a webview. Each of the webviews acts as a multi-page form, which wehn submitted makes a call to the backend of this service containing the data submitted by the user. The backend then calls Smooch to echo the selection into the conversation as an appUser message.
