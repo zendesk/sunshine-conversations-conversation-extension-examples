@@ -25,7 +25,7 @@ function webviewSubmissionHandler(req, res) {
   smooch.appUsers.sendMessage(req.body.appId, req.body.userId, {
     mediaUrl: req.body.imagePath ? process.env.SERVICE_URL + req.body.imagePath : undefined,
     text: req.body.text,
-    role: 'appUser',
+    role: 'appMaker',
     type: req.body.imagePath ? 'image' : 'text',
   })
   	.then(() => res.end())
@@ -39,7 +39,7 @@ function appUserMessageHandler(req, res) {
     if (req.body.trigger !== 'message:appUser') {
       return res.end();
     }
-    
+
     let messageData;
 
     for (const message of req.body.messages) {
@@ -54,10 +54,10 @@ function appUserMessageHandler(req, res) {
  			.then(() => res.end())
  			.catch((err) => {
  				console.log('Error in webhook handler', err);
- 				res.status(500).send(err.message);	
+ 				res.status(500).send(err.message);
  			})
     }
-    
+
     res.end();
 }
 
@@ -69,8 +69,14 @@ function sendWebView(userId, text, buttonText, path) {
             actions: [{
                 type: 'webview',
                 text: buttonText,
+                size: 'tall',
                 uri: `${process.env.SERVICE_URL}/examples/${path}?userId=${userId}&appId=${process.env.APP_ID}`,
-                fallback: process.env.SERVICE_URL
+                fallback: `${process.env.SERVICE_URL}/examples/${path}?userId=${userId}&appId=${process.env.APP_ID}`,
+                extraChannelOptions: {
+                  messenger: {
+                    messenger_extensions: true
+                  }
+                }
             }]
         });
 }
