@@ -78,10 +78,10 @@ async function sendWebView(userId) {
         message: {
             role: 'appMaker',
             type: 'text',
-            text: 'Pick from the three hottest restaurants:',
+            text: 'We have a range of baskets to suit any taste!',
             actions: [{
                 type: 'webview',
-                text: 'Make a reservation',
+                text: 'Choose a subscription',
                 uri: `${SERVICE_URL}?userId=${userId}`,
                 fallback: SERVICE_URL
             }]

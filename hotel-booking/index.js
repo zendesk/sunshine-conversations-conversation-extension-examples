@@ -29,7 +29,7 @@ express()
 
 async function webviewSubmissionHandler(req, res) {
     const { imagePath, userId, text } = req.body;
-    const mediaUrl = imagePath ? `${SERVICE_URL}${imagePath}` : null;
+    const mediaUrl = imagePath ? `${SERVICE_URL}${imagePath}` : undefined;
 
     try {
         await smooch.appUsers.sendMessage({

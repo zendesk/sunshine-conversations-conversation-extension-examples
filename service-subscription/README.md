@@ -1,5 +1,5 @@
-# Restaurant Reservation
-![Restaurant reservation Preview](https://smooch.io/static_assets/images/shared/restaurant-reservation-preview.jpg)
+# Service Subscription
+![Service Subscription Preview](https://smooch.io/static_assets/images/shared/service-subscription-preview.jpg)
 
 ## Prerequisites
 
