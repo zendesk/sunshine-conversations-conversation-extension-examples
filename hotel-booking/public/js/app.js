@@ -22,7 +22,6 @@ window.utils = {
 			url: '/api/response/',
 			type: 'POST',
 			data: JSON.stringify(Object.assign({
-				appId: utils.getParameterByName('appId'),
 				userId: utils.getParameterByName('userId')
 			}, data)),
 			contentType: 'application/json',

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index"
+    "start": "nodemon index"
   },
   "author": "",
   "license": "MIT",
@@ -12,6 +12,7 @@
     "body-parser": "1.18.2",
     "dotenv": "4.0.0",
     "express": "4.16.2",
+    "nodemon": "^1.17.5",
     "smooch-core": "5.4.0"
   }
 }
