@@ -2,7 +2,6 @@
 <html>
 
 <head>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <link media="all" rel="stylesheet" href="../../css/bootstrap.min.css">
     <link media="all" rel="stylesheet" href="../../css/custom.css">
 </head>
@@ -781,6 +780,7 @@
         }
 
         function onComplete(app) {
+            console.log(app.state.thumb)
             var text = 'Selection: the ' +
                 app.state.room +
                 ' on Tuesday 12th December, for 2 nights';
@@ -791,6 +791,7 @@
             });
         }
     </script>
+
 </body>
 
 </html>
