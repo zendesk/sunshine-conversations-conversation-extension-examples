@@ -1,5 +1,5 @@
-# Hotel Booking
-![Hotel Booking Preview](https://smooch.io/static_assets/images/shared/hotel-booking-preview.jpg)
+# Restaurant Reservation
+![Restaurant reservation](https://smooch.io/static_assets/images/shared/restaurant-reservation-preview.jpg)
 
 ## Prerequisites
 
