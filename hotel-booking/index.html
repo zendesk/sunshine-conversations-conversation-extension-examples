@@ -9,8 +9,27 @@
         </script>
         <title>Hotel Booking Example</title>
         <style>
+            html { background: #B1C3F7; }
+            h1, p, li {
+                font-family: 'Helvetica Neue', 'Helvetica', sans-serif;
+                font-size: 20px;
+                font-weight: 300;
+                color: #464a5c;
+            }
+            h1 {
+                font-size: 32px;
+                font-weight: 500;
+                text-align: center;
+                margin-top: 20px;
+            }
+            .type {
+                border-bottom: 1px solid #464a5c;
+                font-size: 28px;
+                line-height: 1.5;
+            }
             #activateMessenger {
                 color: rgb(255, 255, 255);
+                cursor: pointer;
                 font-weight: 400;
                 box-shadow: rgba(63, 49, 178, 0.1) 0px 2px 4px, rgba(63, 49, 178, 0.03) 0px 4px 14px;
                 background-color: rgb(163, 71, 183);
@@ -27,13 +46,16 @@
         </style>
 	</head>
 	<body>
-		<button id='activateMessenger'>Activate Web Messenger</button>
+        <h1>Conversation Extension Example</h1>
+        <p class="type">Hotel Booking</p>
         <p>To trigger conversation-extension write a message that contains one of the following expressions:</p>
         <ul>
             <li>"book a room"</li>
             <li>"reserve a room"</li>
         </ul>
-        <p><em>you can change these expressions and/or add more in the <span>intents.js</span> file.</em></p>
-		<script src="/js/client.js" type='text/javascript'></script>
+        <button id='activateMessenger'>Activate Web Messenger</button>
+        <p><em>Change these expressions and/or add more in the <a href="https://github.com/smooch/conversation-extension-examples/blob/master/hotel-booking/intents.js">intents.js</a> file.</em></p>
+        <p>More examples are available on Gihtub (<a href="https://github.com/smooch/conversation-extension-examples">https://github.com/smooch/conversation-extension-examples</a>)</p>
+        <script src="/js/client.js" type='text/javascript'></script>
 	</body>
 </html>
