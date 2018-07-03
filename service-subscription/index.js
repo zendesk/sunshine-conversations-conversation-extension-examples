@@ -4,6 +4,7 @@ require('dotenv').config();
 const express = require('express');
 const Smooch = require('smooch-core');
 const bodyParser = require('body-parser');
+const path = require('path')
 const { triggerConversationExtension } = require('./intents.js')
 
 const PORT = process.env.PORT || 8999;
@@ -21,11 +22,21 @@ const smooch = new Smooch({
 });
 
 express()
-    .use(express.static('public'))
+    .use(express.static(path.join(__dirname + '/public')))
     .use(bodyParser.json())
     .post('/api/response', webviewSubmissionHandler)
     .post('/api/webhooks', appUserMessageHandler)
+    .get('/api/appId', sendAppId)
+    .get('/', showMessenger)
     .listen(PORT, () => console.log('listening on port ' + PORT));
+
+function showMessenger(req, res) {
+    res.sendFile(path.join(__dirname, '/index.html'))
+}
+
+function sendAppId(req, res) {
+    res.send(JSON.stringify({ appId }));
+}
 
 async function webviewSubmissionHandler(req, res) {
     const { imagePath, userId, text } = req.body;
@@ -82,7 +93,7 @@ async function sendWebView(userId) {
             actions: [{
                 type: 'webview',
                 text: 'Choose a subscription',
-                uri: `${SERVICE_URL}?userId=${userId}`,
+                uri: `${SERVICE_URL}/subscription.html?userId=${userId}`,
                 fallback: SERVICE_URL
             }]
         }
