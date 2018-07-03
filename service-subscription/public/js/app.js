@@ -38,28 +38,26 @@ window.app = {
   			window.webviewSdkInit = function(WebviewSdk) {
   				var docWidth = $('body').width();
   				var $screen = $('.screen');
-  				var $actionBtns = $('.action-next, .action-back, .action-full, .list-item-next');
+                var $actionBtns = $('.action-next, .action-back, .action-full, .list-item-next');
 
-     			if (docWidth < 770) {
-					$screen.hide().eq (0).css({ display: 'flex' })
-					$actionBtns.on('click', function(e) {
-						var $this = $(this);
-						var $parent = $this.parents('.screen');
-						var direction = $this.data('direction');
-						var $next = (direction == 'next') ? $parent.next('.screen') : (direction == 'back') ? $parent.prev('.screen') : $('#' + direction);
-						
-						if ($next.length == 0) {
-							onComplete(app, $this);
-							WebviewSdk.close();
-							return;
-						}
+                $screen.hide().eq (0).css({ display: 'flex' })
+                $actionBtns.on('click', function(e) {
+                    var $this = $(this);
+                    var $parent = $this.parents('.screen');
+                    var direction = $this.data('direction');
+                    var $next = (direction == 'next') ? $parent.next('.screen') : (direction == 'back') ? $parent.prev('.screen') : $('#' + direction);
 
-						onStateChange(app, $this);
-						$parent.css({ display: 'none' });
-						$next.css({ display: 'flex' });
-						$next.find('.body').scrollTop (0);
-					});
-    			}
+                    if ($next.length == 0) {
+                        onComplete(app, $this);
+                        WebviewSdk.close();
+                        return;
+                    }
+
+                    onStateChange(app, $this);
+                    $parent.css({ display: 'none' });
+                    $next.css({ display: 'flex' });
+                    $next.find('.body').scrollTop (0);
+                });
 
     			$('.collapse').on('shown.bs.collapse', function () {
       				this.scrollIntoView();
