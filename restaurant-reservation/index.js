@@ -4,6 +4,7 @@ require('dotenv').config();
 const express = require('express');
 const Smooch = require('smooch-core');
 const bodyParser = require('body-parser');
+const path = require('path')
 const { triggerConversationExtension } = require('./intents.js')
 
 const PORT = process.env.PORT || 8999;
@@ -21,14 +22,28 @@ const smooch = new Smooch({
 });
 
 express()
-    .use(express.static('public'))
+    .use(express.static(path.join(__dirname + '/public')))
     .use(bodyParser.json())
     .post('/api/response', webviewSubmissionHandler)
     .post('/api/webhooks', appUserMessageHandler)
+    .get('/api/appId', sendAppId)
+    .get('/', showMessenger)
     .listen(PORT, () => console.log('listening on port ' + PORT));
 
+function showMessenger(req, res) {
+    res.sendFile(path.join(__dirname, '/index.html'))
+}
+
+function sendAppId(req, res) {
+    res.send(JSON.stringify({ appId }))
+}
+
 async function webviewSubmissionHandler(req, res) {
-    const { imagePath, userId, text } = req.body;
+    const {
+        imagePath,
+        userId,
+        text
+    } = req.body;
     const mediaUrl = imagePath ? `${SERVICE_URL}${imagePath}` : undefined;
 
     try {
@@ -49,7 +64,13 @@ async function webviewSubmissionHandler(req, res) {
 }
 
 async function appUserMessageHandler(req, res) {
-    const { messages, trigger, appUser: { _id: userId } } = req.body;
+    const {
+        messages,
+        trigger,
+        appUser: {
+            _id: userId
+        }
+    } = req.body;
 
     if (trigger !== 'message:appUser') {
         return res.end();
@@ -57,9 +78,7 @@ async function appUserMessageHandler(req, res) {
     try {
         for (const message of messages) {
             const text = message.text.toLowerCase();
-
             triggerConversationExtension.forEach(trigger => {
-
                 (text.includes(trigger)) && sendWebView(userId);
             });
         }
@@ -82,7 +101,7 @@ async function sendWebView(userId) {
             actions: [{
                 type: 'webview',
                 text: 'Make a reservation',
-                uri: `${SERVICE_URL}?userId=${userId}`,
+                uri: `${SERVICE_URL}/restaurant-reservation.html?userId=${userId}`,
                 fallback: SERVICE_URL
             }]
         }
