@@ -5,9 +5,7 @@ const express = require('express');
 const Smooch = require('smooch-core');
 const bodyParser = require('body-parser');
 const path = require('path');
-const {
-    triggerConversationExtension
-} = require('./intents.js')
+const { triggerConversationExtension } = require('./intents.js')
 
 const PORT = process.env.PORT || 8999;
 
@@ -38,9 +36,7 @@ function showMessenger(req, res) {
 }
 
 function sendAppId(req, res) {
-    res.send(JSON.stringify({
-        appId
-    }));
+    res.send(JSON.stringify({ appId }));
 }
 
 async function webviewSubmissionHandler(req, res) {
@@ -83,9 +79,7 @@ async function appUserMessageHandler(req, res) {
     try {
         for (const message of messages) {
             const text = message.text.toLowerCase();
-
             triggerConversationExtension.forEach(trigger => {
-
                 (text.includes(trigger)) && sendWebView(userId);
             });
         }

@@ -1,13 +1,13 @@
 {
-    "name": "conversation-extension",
+    "name": "conversation-extension-reservation",
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
     "scripts": {
-        "start": "nodemon index"
+        "start": "nodemon index.js"
     },
     "author": "",
-    "license": "MIT",
+    "license": "ISC",
     "dependencies": {
         "body-parser": "1.18.2",
         "dotenv": "4.0.0",

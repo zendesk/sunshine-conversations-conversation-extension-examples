@@ -7,7 +7,7 @@
                 function o(){try{var e;if((e="string"==typeof this.response?JSON.parse(this.response):this.response).url){var t=n.getElementsByTagName("script")[0],r=n.createElement("script");r.async=!0,r.src=e.url,t.parentNode.insertBefore(r,t)}}catch(e){}}var s,p,a,i=[],c=[];e[t]={init:function(){s=arguments;var e={then:function(n){return c.push({type:"t",next:n}),e},catch:function(n){return c.push({type:"c",next:n}),e}};return e},on:function(){i.push(arguments)},render:function(){p=arguments},destroy:function(){a=arguments}},e.__onWebMessengerHostReady__=function(n){if(delete e.__onWebMessengerHostReady__,e[t]=n,s)for(var r=n.init.apply(n,s),o=0;o<c.length;o++){var u=c[o];r="t"===u.type?r.then(u.next):r.catch(u.next)}p&&n.render.apply(n,p),a&&n.destroy.apply(n,a);for(o=0;o<i.length;o++)n.on.apply(n,i[o])};var u=new XMLHttpRequest;u.addEventListener("load",o),u.open("GET","https://"+r+".webloader.smooch.io/",!0),u.responseType="json",u.send()
             }(window,document, "Smooch", '123456789');
         </script>
-        <title>Hotel Booking Example</title>
+        <title>Restaurant Reservation Example</title>
         <style>
             html { background: #B1C3F7; }
             h1, h2, p, li {
@@ -48,11 +48,11 @@
 	</head>
 	<body>
         <h1>Conversation Extension Example</h1>
-        <h2 class="type">Hotel Booking</h2>
+        <h2 class="type">Restaurant Reservation</h2>
         <p>To trigger conversation-extension write a message that contains one of the following expressions:</p>
-        <ul>
-            <li>"book a room"</li>
-            <li>"reserve a room"</li>
+        <ul> 
+            <li>"reserve a table"</li>
+            <li>"make a reservation"</li>
         </ul>
         <button id='activateMessenger'>Activate Web Messenger</button>
         <p><em>Change these expressions and/or add more in the <a href="https://github.com/smooch/conversation-extension-examples/blob/master/hotel-booking/intents.js">intents.js</a> file.</em></p>
