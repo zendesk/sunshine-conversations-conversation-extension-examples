@@ -1,0 +1,22 @@
+html, body, h1, h2, h3, h4, h5, h6, p, a {
+    font-family: 'Helvetica Neue', 'Helvetica', sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+    color: #464a5c;
+}
+
+html { background: #B1C3F7; }
+
+h1 {
+    font-size: 32px;
+    font-weight: 500;
+    text-align: center;
+    margin-top: 20px;
+}
+
+h2 {
+    border-bottom: 1px solid #464a5c;
+    font-size: 28px;
+    font-weight: 300;
+    line-height: 1.5;
+}
