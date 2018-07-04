@@ -11,10 +11,11 @@ All the folders include an isolated app that can run on its own.
 - A active app (need the `appId`).
 - Knowledge and access to a tunnelling service such as [ngrok](https://ngrok.com/)
 
-## Built with `js`, `node` and `express`
+**Built with `js`, `node` and `express`**
+
 - [Hotel Booking app](https://github.com/smooch/conversation-extension-examples/tree/master/hotel-booking)
 - [Restaurant reservation app](https://github.com/smooch/conversation-extension-examples/tree/master/restaurant-reservation)
 - [Subscription service app](https://github.com/smooch/conversation-extension-examples/tree/master/service-subscription)
 
-## Built with `react` and `express`
+**Built with `react` and `express`**
 - [Datepicker app](https://github.com/smooch/conversation-extension-examples/tree/master/datepicker-react)
