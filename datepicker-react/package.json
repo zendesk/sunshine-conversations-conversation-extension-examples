@@ -13,6 +13,7 @@
         "react": "^16.4.1",
         "react-datepicker": "^1.5.0",
         "react-dom": "^16.4.1",
+        "react-helmet": "^5.2.0",
         "react-router-dom": "^4.3.1",
         "react-scripts": "1.1.4",
         "smooch": "^4.12.9",
@@ -22,7 +23,7 @@
     "scripts": {
         "start:app": "react-scripts start",
         "start:server": "nodemon server/index.js",
-        "develop": "concurrently \"react-scripts start\" \"nodemon server/index.js\"",
+        "dev": "concurrently \"npm run start:app\" \"npm run start:server\"",
         "build": "react-scripts build",
         "test": "react-scripts test --env=jsdom",
         "eject": "react-scripts eject"

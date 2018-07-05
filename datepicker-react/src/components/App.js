@@ -35,7 +35,11 @@ class App extends Component {
 
     activateMessenger = () => {
         Smooch.init({
-            appId: this.appId
+            appId: this.appId,
+            customColors: {
+                brandColor: '46ACF7',
+                conversationColor: '19A661'
+            }
         }).then(() => {
             Smooch.open();
         });

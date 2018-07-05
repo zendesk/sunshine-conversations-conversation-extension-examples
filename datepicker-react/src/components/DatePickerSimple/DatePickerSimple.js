@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import DatePicker from 'react-datepicker'; // https://reactdatepicker.com/ for options and settings.
+import { Helmet } from 'react-helmet';
 import qs from 'qs';
 import moment from 'moment';
 import Button from  './Button';
@@ -18,6 +19,7 @@ class DatePickerSimple extends Component {
     }
     componentDidMount() {
         // webviewSdk script is added in index.html and initialized here.
+        // eslint-disable-next-line
         window.webviewSdkInit;
     }
     handleChange = (date) => {
@@ -43,20 +45,23 @@ class DatePickerSimple extends Component {
     }
 
     render() {
-        const { selectedDate, userId } = this.state;
+        const { selectedDate } = this.state;
 
         return (
             <div id="datepicker-simple">
+                <Helmet title={'Select Date'} />
                 <DatePicker
                     inline
                     minDate={moment()}
                     selected={selectedDate}
                     onChange={date => this.handleChange(date)}
                 />
-                <Button
-                    selectedDate={selectedDate}
-                    submitDate={this.submitDate}
-                />
+                <div className="nav">
+                    <Button
+                        selectedDate={selectedDate}
+                        submitDate={this.submitDate}
+                    />
+                </div>
             </div>
         )
     }  

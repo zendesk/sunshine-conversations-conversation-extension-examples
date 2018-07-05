@@ -2,13 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledButton = styled.button`
-    background: #8E54E9;
+    background: #46ACF7;
     border: none;
+    border-radius: 3px;
     color: #fff;
     cursor: pointer;
-    height: 44px;
+    height: 40px;
     font-size: 14px;
-    font-weight: 700;
+    font-weight: 300;
+    margin: 8px;
     text-transform: uppercase;
     width: 100%;
 `;

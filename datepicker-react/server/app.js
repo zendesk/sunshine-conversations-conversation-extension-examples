@@ -92,7 +92,8 @@ async function sendWebView(userId) {
             text: 'Select your delivery date from the calendar.',
             actions: [{
                 type: 'webview',
-                text: 'Choose a room',
+                size: 'full',
+                text: 'Select Date',
                 uri: `${SERVICE_URL}/datepicker-simple?userId=${userId}`,
                 fallback: SERVICE_URL
             }]
