@@ -4,13 +4,16 @@ const bodyParser = require('body-parser');
 const Smooch = require('smooch-core');
 const moment = require('moment');
 const { triggerConversationExtension } = require('./intents');
+const httpProxy = require('http-proxy');
+const proxy = httpProxy.createProxyServer({});
 
 const {
     APP_ID: appId,
     KEY_ID,
     SECRET,
-    SERVICE_URL
+    REACT_APP_SERVER_URL
 } = process.env;
+const REACT_APP_PORT = process.env.PORT || 3000;
 
 const smooch = new Smooch({
     keyId: KEY_ID,
@@ -29,6 +32,11 @@ app.use(bodyParser.json());
 app.get('/appId', sendAppId);
 app.post('/date', handleDate);
 app.post('/webhooks', handleMessage);
+
+// Proxy all other routes to the react app
+app.get('*', (req, res) => {
+    proxy.web(req, res, {target: `http://localhost:${REACT_APP_PORT}`});
+});
 
 function sendAppId(req, res) {
     res.send(JSON.stringify({ appId }));
@@ -94,8 +102,8 @@ async function sendWebView(userId) {
                 type: 'webview',
                 size: 'full',
                 text: 'Select Date',
-                uri: `${SERVICE_URL}/datepicker-simple?userId=${userId}`,
-                fallback: SERVICE_URL
+                uri: `${REACT_APP_SERVER_URL}/datepicker-simple?userId=${userId}`,
+                fallback: REACT_APP_SERVER_URL
             }]
         }
     });

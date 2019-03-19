@@ -6,7 +6,7 @@ import DatePickerSimple from './components/DatePickerSimple/DatePickerSimple';
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 
-const server = 'http://gnomecircle.ngrok.io';
+const server = process.env.REACT_APP_SERVER_URL;
 const DatePickerSimpleWithProps = () => <DatePickerSimple server={server} />
 const AppWithProps = () => <App server={server} />
 
