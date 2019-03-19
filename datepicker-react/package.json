@@ -18,13 +18,13 @@
         "react-router-dom": "^4.3.1",
         "react-scripts": "1.1.4",
         "smooch": "^4.12.9",
-        "smooch-core": "^6.6.0",
+        "smooch-core": "8.4.0",
         "styled-components": "^3.3.3"
     },
     "scripts": {
+        "start": "concurrently \"npm run start:app\" \"npm run start:server\"",
         "start:app": "react-scripts start",
         "start:server": "nodemon server/index.js",
-        "dev": "concurrently \"npm run start:app\" \"npm run start:server\"",
         "build": "react-scripts build",
         "test": "react-scripts test --env=jsdom",
         "eject": "react-scripts eject"

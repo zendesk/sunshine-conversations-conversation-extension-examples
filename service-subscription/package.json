@@ -13,6 +13,6 @@
         "dotenv": "4.0.0",
         "express": "4.16.2",
         "nodemon": "^1.17.5",
-        "smooch-core": "5.4.0"
+        "smooch-core": "8.4.0"
     }
 }
