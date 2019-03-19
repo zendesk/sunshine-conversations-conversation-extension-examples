@@ -1,5 +1,5 @@
 const triggerConversationExtension = [
-    'choose the delivery date'
+    'choose date'
 ]
     
 module.exports = { triggerConversationExtension };
