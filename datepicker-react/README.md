@@ -15,8 +15,8 @@ _See the `package.json` for all dependencies_
 2. Run `npm install`
 3. Expose the port you're running this service on (8000 is the deafult) to the web (e.g. using a service like ngrok.io)
 4. Create a .env file with the credentials necessary to run this service using the .env.example as a guide
-5. Run `npm run dev` to run the service and react app together, which by default will run on ports `8000` and `3000` respectively.
-6. Configure a webhook for All basic triggers at 'https://app.smooch.io/apps/APP_ID/webhooks' to point towards the ngrok/other link exposing the port being used at the route '/webhooks'
+5. Run `npm start` to run the service and react app together, which by default will run on ports `8000` and `3000` respectively.
+6. Configure a webhook for All basic triggers at 'https://app.smooch.io/apps/APP_ID/webhooks' to point towards the ngrok/other link exposing the port being used at the route '/api/webhooks'
 
 ## Try it out!
 

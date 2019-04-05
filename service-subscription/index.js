@@ -18,7 +18,7 @@ const {
 const smooch = new Smooch({
     keyId: KEY_ID,
     secret: SECRET,
-    scope: 'account'
+    scope: 'app'
 });
 
 express()

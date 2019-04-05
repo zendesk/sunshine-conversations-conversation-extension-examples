@@ -18,7 +18,7 @@ const REACT_APP_PORT = process.env.PORT || 3000;
 const smooch = new Smooch({
     keyId: KEY_ID,
     secret: SECRET,
-    scope: 'account'
+    scope: 'app'
 });
 
 const app = express();
@@ -31,7 +31,7 @@ app.use(function(req, res, next) {
 app.use(bodyParser.json());
 app.get('/appId', sendAppId);
 app.post('/date', handleDate);
-app.post('/webhooks', handleMessage);
+app.post('/api/webhooks', handleMessage);
 
 // Proxy all other routes to the react app
 app.get('*', (req, res) => {
