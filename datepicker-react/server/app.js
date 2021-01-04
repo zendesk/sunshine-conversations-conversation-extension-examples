@@ -58,7 +58,7 @@ async function handleDate(req, res) {
 async function handleMessage(req, res) {
   // Ignore v1 webhooks
   if (req.body.version) {
-    console.log("Old version webhooks are recieved. Please use v2 webhooks.");
+    console.log("Old version webhooks are received. Please use v2 webhooks.");
     return res.end();
   }
 
