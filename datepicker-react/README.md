@@ -2,7 +2,7 @@
 
 ## Explanation
 
-This service listens for appUser messages from Smooch and responds with a button triggering a webview. The webview acts as a multi-page form, which when submitted makes a call to the backend of this service containing the data submitted by the user. The backend then calls Smooch to echo the selection into the conversation as an appUser message.
+This service listens for user messages from Sunshine Conversations and responds with a button triggering a webview. The webview acts as a multi-page form, which when submitted makes a call to the backend of this service containing the data submitted by the user. The backend then calls Sunshine Conversations to echo the selection into the conversation as a user message.
 
 ## Prerequisites
 
@@ -11,7 +11,7 @@ _See the `package.json` for all dependencies_
 
 ## Setup
 
-1. Run `git clone https://github.com/smooch/conversation-extension-examples.git` and `cd datepicker-react`
+1. Run `git clone https://github.com/zendesk/sunshine-conversations-conversation-extension-examples.git` and `cd datepicker-react`
 2. Run `npm install`
 3. Expose the port you're running this service on (8000 is the deafult) to the web (e.g. using a service like ngrok.io)
 4. Create a .env file with the credentials necessary to run this service using the .env.example as a guide

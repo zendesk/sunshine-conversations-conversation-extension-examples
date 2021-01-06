@@ -2,7 +2,7 @@
 
 ## Explanation
 
-This service listens for appUser messages from Smooch and responds with a button triggering a webview. The webview acts as a multi-page form, which when submitted makes a call to the backend of this service containing the data submitted by the user. The backend then calls Smooch to echo the selection into the conversation as an appUser message.
+This service listens for user messages from Sunshine Conversations and responds with a button triggering a webview. The webview acts as a multi-page form, which when submitted makes a call to the backend of this service containing the data submitted by the user. The backend then calls Sunshine Conversations to echo the selection into the conversation as a user message.
 
 
 ## Service Subscription
@@ -14,7 +14,7 @@ These examples are built with node.js and express.
 
 ## SETUP
 
-1. run `git clone this_repo`
+1. run `git clone https://github.com/zendesk/sunshine-conversations-conversation-extension-examples.git`
 2. run `npm install`
 3. expose the port you're running this service on to the web (e.g. using a service like ngrok.io)
 4. create a .env file with the credentials necessary to run this service using the .env.example as a guide
