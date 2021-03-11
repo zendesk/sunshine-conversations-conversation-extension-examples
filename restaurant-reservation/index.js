@@ -8,7 +8,7 @@ const path = require("path");
 const { triggerConversationExtension } = require("./intents.js");
 
 const PORT = process.env.PORT || 8999;
-const { APP_ID: appId, KEY_ID, SECRET, SERVICE_URL } = process.env;
+const { APP_ID: appId, INTEGRATION_ID: integrationId, KEY_ID, SECRET, SERVICE_URL } = process.env;
 
 const defaultClient = SunshineConversationsApi.ApiClient.instance;
 const basicAuth = defaultClient.authentications["basicAuth"];
@@ -23,6 +23,7 @@ express()
   .post("/api/response", webviewSubmissionHandler)
   .post("/api/webhooks", userMessageHandler)
   .get("/api/appId", sendAppId)
+  .get("/api/integrationId", sendIntegrationId)
   .get("/", showMessenger)
   .listen(PORT, () => console.log("listening on port " + PORT));
 
@@ -32,6 +33,10 @@ function showMessenger(req, res) {
 
 function sendAppId(req, res) {
   res.send(JSON.stringify({ appId }));
+}
+
+function sendIntegrationId(req, res) {
+  res.send(JSON.stringify({ integrationId }));
 }
 
 async function webviewSubmissionHandler(req, res) {

@@ -23,19 +23,19 @@ class App extends Component {
     componentDidMount() {
         const { server } = this.props;
 
-        fetch(`${server}/appId`, {
+        fetch(`${server}/integrationId`, {
             method: 'GET',
             headers: { 'Content-type': 'application/json' }
         }).then(res => {
             return res.json();
         }).then(data => {
-            this.appId = data.appId;
+            this.integrationId = data.integrationId;
         }).catch(err => console.log('fetch Error: ', err));
     }
 
     activateMessenger = () => {
         Smooch.init({
-            appId: this.appId,
+            integrationId: this.integrationId,
             customColors: {
                 brandColor: '46ACF7',
                 conversationColor: '19A661'

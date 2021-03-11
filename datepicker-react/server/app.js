@@ -7,7 +7,7 @@ const { triggerConversationExtension } = require("./intents");
 const httpProxy = require("http-proxy");
 const proxy = httpProxy.createProxyServer({});
 
-const { APP_ID: appId, KEY_ID, SECRET, REACT_APP_SERVER_URL } = process.env;
+const { APP_ID: appId, INTEGRATION_ID: integrationId, KEY_ID, SECRET, REACT_APP_SERVER_URL } = process.env;
 const REACT_APP_PORT = process.env.PORT || 3000;
 
 const defaultClient = SunshineConversationsApi.ApiClient.instance;
@@ -29,6 +29,7 @@ app.use(function (req, res, next) {
 });
 app.use(bodyParser.json());
 app.get("/appId", sendAppId);
+app.get("/integrationId", sendIntegrationId);
 app.post("/date", handleDate);
 app.post("/api/webhooks", handleMessage);
 
@@ -39,6 +40,10 @@ app.get("*", (req, res) => {
 
 function sendAppId(req, res) {
   res.send(JSON.stringify({ appId }));
+}
+
+function sendIntegrationId(req, res) {
+  res.send(JSON.stringify({ integrationId }));
 }
 
 async function handleDate(req, res) {
