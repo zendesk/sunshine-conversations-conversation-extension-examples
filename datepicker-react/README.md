@@ -16,7 +16,7 @@ _See the `package.json` for all dependencies_
 3. Expose the port you're running this service on (8000 is the deafult) to the web (e.g. using a service like ngrok.io)
 4. Create a .env file with the credentials necessary to run this service using the .env.example as a guide
 5. Run `npm start` to run the service and react app together, which by default will run on ports `8000` and `3000` respectively.
-6. Configure a webhook for All basic triggers at 'https://app.smooch.io/apps/APP_ID/webhooks' to point towards the ngrok/other link exposing the port being used at the route '/api/webhooks'
+6. Configure a V2 webhook for _Conversation message_ events at `https://app.smooch.io/apps/APP_ID/webhooks` to point towards the ngrok/other link exposing the port being used at the route `/api/webhooks`
 
 ## Try it out!
 
@@ -27,7 +27,7 @@ _See the `package.json` for all dependencies_
 ## Overview
 
 Port 8000 hosts the web service, which hosts the following endpoints:
-- `/webhooks`: listens for webhooks from your Smooch app
+- `/api/webhooks`: listens for webhooks from your Smooch app
 - `/appId`: sends the `appId` to the react app to setup the messenger (based on the info provided in the `.env` file)
 - `/date`: listens for the date date submitted by the user, and creates a user message with that information.
 

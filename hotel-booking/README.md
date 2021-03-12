@@ -19,7 +19,7 @@ These examples are built with node.js and npm.
 3. expose the port you're running this service on to the web (e.g. using a service like ngrok.io)
 4. create a .env file with the credentials necessary to run this service using the .env.example as a guide
 5. run `npm start` to run the server
-6. configure a webhook for All basic triggers at 'https://app.smooch.io/apps/APP_ID/webhooks' to point towards the ngrok/other link exposing the port being used at the route '/api/webhooks'
+6. configure a V2 webhook for _Conversation message_ events at `https://app.smooch.io/apps/APP_ID/webhooks` to point towards the ngrok/other link exposing the port being used at the route `/api/webhooks`
 
 ## Try it out!
 
