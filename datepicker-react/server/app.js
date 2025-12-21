@@ -7,10 +7,17 @@ const { triggerConversationExtension } = require("./intents");
 const httpProxy = require("http-proxy");
 const proxy = httpProxy.createProxyServer({});
 
-const { APP_ID: appId, INTEGRATION_ID: integrationId, KEY_ID, SECRET, REACT_APP_SERVER_URL } = process.env;
+const {
+  APP_ID: appId,
+  INTEGRATION_ID: integrationId,
+  KEY_ID,
+  SECRET,
+  REACT_APP_SERVER_URL,
+} = process.env;
 const REACT_APP_PORT = process.env.PORT || 3000;
 
 const defaultClient = SunshineConversationsApi.ApiClient.instance;
+defaultClient.basePath = "https://z3nluis-citing.zendesk-staging.com/sc";
 const basicAuth = defaultClient.authentications["basicAuth"];
 basicAuth.username = KEY_ID;
 basicAuth.password = SECRET;
@@ -23,7 +30,7 @@ app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
     "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
+    "Origin, X-Requested-With, Content-Type, Accept",
   );
   next();
 });
@@ -80,9 +87,10 @@ async function handleMessage(req, res) {
 
   try {
     const text = message.content.text.toLowerCase();
-    triggerConversationExtension.forEach((trigger) => {
-      text.includes(trigger) && sendWebView(conversationId, userId);
-    });
+    if (text.includes("choose date")) {
+      console.log("includes trigger", trigger);
+      await sendWebView(conversationId, userId);
+    }
   } catch (err) {
     console.log("Error in webhook handler", err);
     res.status(500).send(err.message);
