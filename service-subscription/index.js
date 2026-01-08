@@ -8,9 +8,15 @@ const path = require("path");
 const { triggerConversationExtension } = require("./intents.js");
 
 const PORT = process.env.PORT || 8999;
-const { APP_ID: appId, INTEGRATION_ID: integrationId, KEY_ID, SECRET, SERVICE_URL } = process.env;
+const { APP_ID: appId, INTEGRATION_ID: integrationId, KEY_ID, SECRET, REACT_APP_SERVER_URL: SERVICE_URL, BASE_URL: baseUrl } = process.env;
 
 const defaultClient = SunshineConversationsApi.ApiClient.instance;
+
+// Configure base path for Zendesk environments
+if (baseUrl) {
+  defaultClient.basePath = `${baseUrl}/sc`;
+}
+
 const basicAuth = defaultClient.authentications["basicAuth"];
 basicAuth.username = KEY_ID;
 basicAuth.password = SECRET;
@@ -22,8 +28,7 @@ express()
   .use(bodyParser.json())
   .post("/api/response", webviewSubmissionHandler)
   .post("/api/webhooks", userMessageHandler)
-  .get("/api/appId", sendAppId)
-  .get("/api/integrationId", sendIntegrationId)
+  .get("/api/config", sendConfig)
   .get("/", showMessenger)
   .listen(PORT, () => console.log("listening on port " + PORT));
 
@@ -31,12 +36,12 @@ function showMessenger(req, res) {
   res.sendFile(path.join(__dirname, "/index.html"));
 }
 
-function sendAppId(req, res) {
-  res.send(JSON.stringify({ appId }));
-}
-
-function sendIntegrationId(req, res) {
-  res.send(JSON.stringify({ integrationId }));
+function sendConfig(req, res) {
+  const config = { integrationId };
+  if (baseUrl) {
+    config.configBaseUrl = `${baseUrl}/sc/sdk`;
+  }
+  res.send(JSON.stringify(config));
 }
 
 async function webviewSubmissionHandler(req, res) {
@@ -65,16 +70,35 @@ async function userMessageHandler(req, res) {
     return res.end();
   }
 
-  const message = req.body.events[0].payload.message;
-  const trigger = req.body.events[0].type;
-  const conversationId = req.body.events[0].payload.conversation.id;
-  const author = req.body.events[0].payload.message.author.type;
-  const userId = req.body.events[0].payload.message.author.userId;
+  const event = req.body.events[0];
+  const trigger = event.type;
 
-  // Ignore if it is not a user message
-  if (trigger !== "conversation:message" || author !== "user") {
+  // Log event type for debugging
+  console.log("Received webhook event:", trigger);
+
+  // Only process conversation:message events
+  if (trigger !== "conversation:message") {
+    console.log("Ignoring non-message event:", trigger);
     return res.end();
   }
+
+  // Check if message exists in payload
+  if (!event.payload.message) {
+    console.log("No message in payload for conversation:message event");
+    return res.end();
+  }
+
+  const message = event.payload.message;
+  const conversationId = event.payload.conversation.id;
+  const author = message.author.type;
+  const userId = message.author.userId;
+
+  // Ignore if it is not a user message
+  if (author !== "user") {
+    console.log("Ignoring non-user message from:", author);
+    return res.end();
+  }
+
   try {
     const text = message.content.text.toLowerCase();
     triggerConversationExtension.forEach((trigger) => {

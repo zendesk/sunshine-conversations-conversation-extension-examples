@@ -7,10 +7,16 @@ const { triggerConversationExtension } = require("./intents");
 const httpProxy = require("http-proxy");
 const proxy = httpProxy.createProxyServer({});
 
-const { APP_ID: appId, INTEGRATION_ID: integrationId, KEY_ID, SECRET, REACT_APP_SERVER_URL } = process.env;
+const { APP_ID: appId, INTEGRATION_ID: integrationId, KEY_ID, SECRET, REACT_APP_SERVER_URL, BASE_URL: baseUrl } = process.env;
 const REACT_APP_PORT = process.env.PORT || 3000;
 
 const defaultClient = SunshineConversationsApi.ApiClient.instance;
+
+// Configure base path for Zendesk environments
+if (baseUrl) {
+  defaultClient.basePath = `${baseUrl}/sc`;
+}
+
 const basicAuth = defaultClient.authentications["basicAuth"];
 basicAuth.username = KEY_ID;
 basicAuth.password = SECRET;
@@ -28,8 +34,7 @@ app.use(function (req, res, next) {
   next();
 });
 app.use(bodyParser.json());
-app.get("/appId", sendAppId);
-app.get("/integrationId", sendIntegrationId);
+app.get("/config", sendConfig);
 app.post("/date", handleDate);
 app.post("/api/webhooks", handleMessage);
 
@@ -38,12 +43,12 @@ app.get("*", (req, res) => {
   proxy.web(req, res, { target: `http://localhost:${REACT_APP_PORT}` });
 });
 
-function sendAppId(req, res) {
-  res.send(JSON.stringify({ appId }));
-}
-
-function sendIntegrationId(req, res) {
-  res.send(JSON.stringify({ integrationId }));
+function sendConfig(req, res) {
+  const config = { integrationId };
+  if (baseUrl) {
+    config.configBaseUrl = `${baseUrl}/sc/sdk`;
+  }
+  res.send(JSON.stringify(config));
 }
 
 async function handleDate(req, res) {
@@ -67,14 +72,32 @@ async function handleMessage(req, res) {
     return res.end();
   }
 
-  const message = req.body.events[0].payload.message;
-  const trigger = req.body.events[0].type;
-  const conversationId = req.body.events[0].payload.conversation.id;
-  const author = req.body.events[0].payload.message.author.type;
-  const userId = req.body.events[0].payload.message.author.userId;
+  const event = req.body.events[0];
+  const trigger = event.type;
+
+  // Log event type for debugging
+  console.log("Received webhook event:", trigger);
+
+  // Only process conversation:message events
+  if (trigger !== "conversation:message") {
+    console.log("Ignoring non-message event:", trigger);
+    return res.end();
+  }
+
+  // Check if message exists in payload
+  if (!event.payload.message) {
+    console.log("No message in payload for conversation:message event");
+    return res.end();
+  }
+
+  const message = event.payload.message;
+  const conversationId = event.payload.conversation.id;
+  const author = message.author.type;
+  const userId = message.author.userId;
 
   // Ignore if it is not a user message
-  if (trigger !== "conversation:message" || author !== "user") {
+  if (author !== "user") {
+    console.log("Ignoring non-user message from:", author);
     return res.end();
   }
 
@@ -92,22 +115,22 @@ async function handleMessage(req, res) {
 }
 
 async function sendWebView(conversationId, userId) {
-  let messagePost = new SunshineConversationsApi.MessagePost();
-  messagePost.setAuthor({ type: "business" });
-  messagePost.setContent({
-    type: "text",
-    text: "Select your delivery date from the calendar.",
-    actions: [
-      {
-        type: "webview",
-        size: "full",
-        text: "Select Date",
-        uri: `${REACT_APP_SERVER_URL}/datepicker-simple?userId=${userId}&conversationId=${conversationId}`,
-        fallback: REACT_APP_SERVER_URL,
-      },
-    ],
-  });
-  await messagesApiInstance.postMessage(appId, conversationId, messagePost);
+    let messagePost = new SunshineConversationsApi.MessagePost();
+    messagePost.setAuthor({ type: "business" });
+    messagePost.setContent({
+      type: "text",
+      text: "Select your delivery date from the calendar.",
+      actions: [
+        {
+          type: "webview",
+          size: "full",
+          text: "Select Date",
+          uri: `${REACT_APP_SERVER_URL}/datepicker-simple?userId=${userId}&conversationId=${conversationId}`,
+          fallback: REACT_APP_SERVER_URL,
+        },
+      ],
+    });
+    await messagesApiInstance.postMessage(appId, conversationId, messagePost);
 }
 
 module.exports = app;

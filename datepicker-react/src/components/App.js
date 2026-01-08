@@ -23,24 +23,26 @@ class App extends Component {
     componentDidMount() {
         const { server } = this.props;
 
-        fetch(`${server}/integrationId`, {
+        fetch(`${server}/config`, {
             method: 'GET',
             headers: { 'Content-type': 'application/json' }
         }).then(res => {
             return res.json();
         }).then(data => {
-            this.integrationId = data.integrationId;
-        }).catch(err => console.log('fetch Error: ', err));
+            this.initConfig = data;
+        }).catch(err => console.log('fetch config Error: ', err));
     }
 
     activateMessenger = () => {
-        Smooch.init({
-            integrationId: this.integrationId,
+        const initConfig = {
+            ...this.initConfig,
             customColors: {
                 brandColor: '46ACF7',
                 conversationColor: '19A661'
             }
-        }).then(() => {
+        };
+
+        Smooch.init(initConfig).then(() => {
             Smooch.open();
         });
     }

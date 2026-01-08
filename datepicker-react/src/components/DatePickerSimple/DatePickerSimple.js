@@ -15,7 +15,7 @@ class DatePickerSimple extends Component {
     });
 
     this.state = {
-      selectedDate: moment(),
+      selectedDate: new Date(),
       userId: receivedParameters.userId,
       conversationId: receivedParameters.conversationId,
     };
@@ -43,7 +43,7 @@ class DatePickerSimple extends Component {
       .then((response) => {
         console.log(
           response,
-          `Submitted ${selectedDate.format(
+          `Submitted ${moment(selectedDate).format(
             "MMM Do YYYY"
           )} for user(${userId}) in conversation(${conversationId})`
         );
@@ -60,7 +60,7 @@ class DatePickerSimple extends Component {
         <Helmet title={"Select Date"} />
         <DatePicker
           inline
-          minDate={moment()}
+          minDate={new Date()}
           selected={selectedDate}
           onChange={(date) => this.handleChange(date)}
         />

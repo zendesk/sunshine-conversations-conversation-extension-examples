@@ -1,13 +1,17 @@
 $(document).ready(function() {
+	var initConfig = null;
+
+	$.ajax({
+		url: "/api/config",
+		type: 'GET',
+		'Content-Type': 'application/json',
+		success: function(result) {
+			initConfig = JSON.parse(result);
+		}
+	});
+
 	$("#activateMessenger").on('click touchstart', function(e) {
-	    $.ajax({
-			url: "/api/integrationId",
-			type: 'GET',
-			'Content-Type': 'application/json',
-			success: function(result) {
-				Smooch.init(JSON.parse(result))
-				Smooch.open();
-		    }
-		});
+		Smooch.init(initConfig);
+		Smooch.open();
 	});
 });
