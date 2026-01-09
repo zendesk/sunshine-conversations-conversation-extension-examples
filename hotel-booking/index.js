@@ -9,7 +9,7 @@ const { triggerConversationExtension } = require("./intents.js");
 
 const PORT = process.env.PORT || 8999;
 
-const { APP_ID: appId, INTEGRATION_ID: integrationId, KEY_ID, SECRET, REACT_APP_SERVER_URL: SERVICE_URL, BASE_URL: baseUrl } = process.env;
+const { APP_ID: appId, INTEGRATION_ID: integrationId, KEY_ID, SECRET, SERVICE_URL, BASE_URL: baseUrl } = process.env;
 
 const defaultClient = SunshineConversationsApi.ApiClient.instance;
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import moment from 'moment';
 
 const StyledButton = styled.button`
     background: #46ACF7;
@@ -17,7 +16,11 @@ const StyledButton = styled.button`
 `;
 
 const Button = ({ selectedDate, submitDate }) => {
-    const displayDate = moment(selectedDate).format('MMM Do YYYY');
+    const displayDate = selectedDate.toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric'
+    });
 
     return (
         <StyledButton onClick={() => submitDate()}>

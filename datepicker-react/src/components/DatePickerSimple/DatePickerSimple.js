@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import DatePicker from "react-datepicker"; // https://reactdatepicker.com/ for options and settings.
 import { Helmet } from "react-helmet";
 import qs from "qs";
-import moment from "moment";
 import Button from "./Button";
 import "react-datepicker/dist/react-datepicker.css"; // Base styling for Calendar
 import "./DatePickerSimple.css"; // Custom Styling for Calendar
@@ -41,11 +40,14 @@ class DatePickerSimple extends Component {
       },
     })
       .then((response) => {
+        const formattedDate = selectedDate.toLocaleDateString('en-US', {
+          month: 'short',
+          day: 'numeric',
+          year: 'numeric'
+        });
         console.log(
           response,
-          `Submitted ${moment(selectedDate).format(
-            "MMM Do YYYY"
-          )} for user(${userId}) in conversation(${conversationId})`
+          `Submitted ${formattedDate} for user(${userId}) in conversation(${conversationId})`
         );
         window.WebviewSdk.close();
       })
