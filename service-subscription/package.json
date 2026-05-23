@@ -9,9 +9,9 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "body-parser": "^1.20.4",
+        "body-parser": "^1.20.5",
         "dotenv": "^16.4.7",
-        "express": "^4.21.2",
+        "express": "^4.22.2",
         "nodemon": "^3.1.9",
         "sunshine-conversations-client": "^9.4.1"
     },
